@@ -5,6 +5,7 @@ from datetime import datetime
 import pandas as pd
 from typing import Dict, Any
 from trail_backtesting import (
+    run_backtest,
     load_minute_data,
     calculate_ema,
     detect_signals,
