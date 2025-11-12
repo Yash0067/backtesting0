@@ -36,22 +36,32 @@ for directory in [DATA_DIR, DOWNLOAD_DIR, UPLOAD_DIR]:
     os.makedirs(directory, exist_ok=True)
 
 app = FastAPI(title="Backtesting API")
-# Configure CORS - Allow all localhost origins for development
-origins = [
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "http://localhost:8000",
-    "http://localhost:8080",  # Add frontend port
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:3001",
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:8080",  # Add frontend port
-    "http://127.0.0.1:56064",  # Browser preview proxy
-]
+
+# Configure CORS - Allow all origins including Vercel
+# Get allowed origins from environment variable or use defaults
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "")
+if allowed_origins_env:
+    # Parse comma-separated origins from environment variable
+    origins = [origin.strip() for origin in allowed_origins_env.split(",")]
+else:
+    # Default origins including Vercel frontend
+    origins = [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://localhost:8000",
+        "http://localhost:8080",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
+        "http://127.0.0.1:8000",
+        "http://127.0.0.1:8080",
+        "http://127.0.0.1:56064",
+        "https://frontend-nu-ten-75.vercel.app",  # Vercel frontend
+        "https://*.vercel.app",  # All Vercel preview deployments
+    ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for development
+    allow_origins=["*"],  # Allow all origins for development (change to origins list for production)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
