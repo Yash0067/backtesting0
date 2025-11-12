@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/backend/app.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/backend/app.py"
+    }
+  ],
+  "env": {
+    "PYTHON_VERSION": "3.11.0"
+  }
+}
+
