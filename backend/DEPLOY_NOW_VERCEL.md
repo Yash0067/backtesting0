@@ -22,8 +22,16 @@
 
 4. **Environment Variables**
    Click "Environment Variables" and add:
-   - `PYTHON_VERSION` = `3.11.0`
-   - `ALLOWED_ORIGINS` = `https://frontend-nu-ten-75.vercel.app`
+   
+   **Variable 1:**
+   - **KEY**: `ALLOWED_ORIGINS` (NOT the URL - just the name!)
+   - **VALUE**: `https://frontend-nu-ten-75.vercel.app`
+   
+   **Variable 2 (Optional):**
+   - **KEY**: `PYTHON_VERSION`
+   - **VALUE**: `3.11.0`
+   
+   ⚠️ **IMPORTANT**: The KEY must be a valid variable name (letters, numbers, underscore only). The URL goes in the VALUE field!
 
 5. **Deploy**
    - Click "Deploy"
