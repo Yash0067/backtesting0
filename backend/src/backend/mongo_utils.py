@@ -203,5 +203,7 @@ class MongoDBManager:
         result = await self.files_metadata.delete_one({"file_id": file_id})
         return result.deleted_count > 0
 
-# Create a global instance
-mongodb = MongoDBManager()
+# Create a global instance with environment variables
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
+MONGODB_DB = os.getenv("MONGODB_DB", "trading_strategy_db")
+mongodb = MongoDBManager(connection_string=MONGODB_URI, db_name=MONGODB_DB)

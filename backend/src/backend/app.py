@@ -23,7 +23,11 @@ from .mongo_utils import mongodb
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 BACKEND_DIR = os.path.dirname(os.path.dirname(APP_DIR))  # backend/
 ROOT_DIR = os.path.dirname(BACKEND_DIR)  # Project root (one level up from backend/)
-DATA_DIR = os.path.join(ROOT_DIR, "data")
+
+# Use environment variable for data directory, or default to project root
+# On Render, use a writable directory in the app directory
+DATA_BASE = os.getenv("DATA_DIR", ROOT_DIR)
+DATA_DIR = os.path.join(DATA_BASE, "data")
 DOWNLOAD_DIR = os.path.join(DATA_DIR, "downloads")
 UPLOAD_DIR = os.path.join(DATA_DIR, "uploads")
 
